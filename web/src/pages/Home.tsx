@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Layout } from "../components/Layout";
 import { Header } from "../components/Header";
 import { Section } from "../components/Section";
+import { ImageInList } from "../components/ImageInList";
 
 export type UserPayloadProps = {
   id: string;
@@ -10,22 +11,36 @@ export type UserPayloadProps = {
   email: string;
 };
 
-type communityImage = {
+export type communityImageProps = {
   id: string;
   prompt: string;
   url: string;
+  createdAt: string;
   user: {
     name: string;
   };
 };
 
 export function Home() {
-  const [communityImages, setCommunityImages] = useState<communityImage[]>([]);
+  const [communityImages, setCommunityImages] = useState<communityImageProps[]>(
+    []
+  );
 
   useEffect(() => {
     fetch("http://localhost:3000/images")
       .then((response) => response.json())
-      .then((data) => setCommunityImages(data));
+      .then((data: communityImageProps[]) => {
+        if (data.length > 0) {
+          data.sort((a: communityImageProps, b: communityImageProps): any => {
+            const firstParam = new Date(a.createdAt);
+            const secondParam = new Date(b.createdAt);
+
+            return firstParam > secondParam ? -1 : 1;
+          });
+        }
+
+        return setCommunityImages(data);
+      });
   }, []);
 
   return (
@@ -36,30 +51,9 @@ export function Home() {
         subtitle="Explore a coleção de imagens criativas e deslumbrantes geradas pela
     DALL·E 2"
       >
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2 justify-items-center">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 mb-2 justify-items-center">
           {communityImages.map((item) => (
-            <div
-              key={item.id}
-              className="relative  shadow-md overflow-hidden border group hover:bg-gray-900 transition-colors"
-            >
-              <img
-                src={item.url}
-                alt=""
-                className="w-full group-hover:opacity-30 transition-opacity"
-              />
-              <div className="w-full p-3 flex flex-col text-white absolute bottom-0 opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="font-medium text-xs uppercase tracking-wider">
-                  "
-                  {item.prompt.length <= 50
-                    ? item.prompt
-                    : item.prompt.slice(0, 60).concat(" ...")}
-                  "
-                </span>
-                <span className="mt-2 font-semibold text-xs">
-                  Feito por: {item.user.name}
-                </span>
-              </div>
-            </div>
+            <ImageInList key={item.id} {...item} />
           ))}
         </div>
 

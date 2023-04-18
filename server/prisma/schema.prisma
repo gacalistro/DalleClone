@@ -24,10 +24,11 @@ model User {
 }
 
 model Image {
-  id     String @id @default(uuid())
-  url    String
-  prompt String
-  userId String
+  id        String   @id @default(uuid())
+  url       String
+  prompt    String
+  userId    String
+  createdAt DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id])
 }

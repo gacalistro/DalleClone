@@ -25,9 +25,9 @@ export function Header() {
 
   return (
     <div className="p-5 flex items-center justify-between border-b border-gray-200 bg-background">
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-2 xs:gap-5">
         <img src={Logo} alt="OpenAi Logo" className="w-6" />
-        <a onClick={() => navigate("/")}>
+        <a onClick={() => navigate("/")} className="cursor-pointer">
           <span
             className={clsx("font-semibold text-sm tracking-wide", {
               ["opacity-100"]: location.pathname === "/",
@@ -38,7 +38,18 @@ export function Header() {
           </span>
         </a>
 
-        <a onClick={() => navigate("/history")}>
+        <a onClick={() => navigate("/create")} className="cursor-pointer">
+          <span
+            className={clsx("font-semibold text-sm tracking-wide", {
+              ["opacity-100"]: location.pathname === "/create",
+              ["opacity-60"]: location.pathname !== "/create",
+            })}
+          >
+            Criar
+          </span>
+        </a>
+
+        <a onClick={() => navigate("/history")} className="cursor-pointer">
           <span
             className={clsx("font-semibold text-sm tracking-wide", {
               ["opacity-100"]: location.pathname === "/history",
@@ -76,6 +87,16 @@ export function Header() {
                   {email}
                 </span>
               </div>
+
+              <div className="flex flex-col px-2 py-1 border-b">
+                <button
+                  onClick={() => navigate("/history")}
+                  className="text-left font-medium text-sm text-gray-800"
+                >
+                  Histórico
+                </button>
+              </div>
+
               <div className="flex flex-col px-2 py-1">
                 <button
                   onClick={handleSignOut}

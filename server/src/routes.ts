@@ -239,6 +239,13 @@ export async function routes(app: FastifyInstance) {
       where: {
         userId: user.id,
       },
+      include: {
+        user: {
+          select: {
+            name: true,
+          },
+        },
+      },
     });
   });
 }

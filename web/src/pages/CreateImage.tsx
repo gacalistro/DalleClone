@@ -8,6 +8,8 @@ import { Layout } from "../components/Layout";
 import { Header } from "../components/Header";
 import { Section } from "../components/Section";
 
+import { getRandomPrompt } from "../utils/getRandomPrompt";
+
 type FormProps = {
   prompt: string;
   openAiImage: string;
@@ -32,7 +34,9 @@ export function CreateImage() {
   const navigate = useNavigate();
 
   function handleSurprise() {
-    console.log("surprise");
+    const randomPrompt = getRandomPrompt(inputValue);
+
+    setInputValue(randomPrompt);
   }
 
   function clearImage() {
