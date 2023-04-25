@@ -9,6 +9,6 @@ const app = fastify({
 app.register(routes);
 app.register(cors);
 
-app.listen({ port: 3000 }, (err, adress) =>
+app.listen({ port: 3000, host: "0.0.0.0" }, (err, adress) =>
   console.log(`Server running on ${adress}`)
 );

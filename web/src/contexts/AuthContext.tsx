@@ -42,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         });
       })
       .catch((error) => {
-        throw error;
+        throw error.message;
       });
   }
 

@@ -78,7 +78,6 @@ export async function routes(app: FastifyInstance) {
 
       return reply.status(200).send({
         token,
-        userId: user.id,
       });
     } else {
       return reply.status(401).send({ error: "Senha incorreta" });
@@ -93,9 +92,13 @@ export async function routes(app: FastifyInstance) {
       return reply.status(401).send({ error: "Usuário não autenticado." });
     }
 
-    const { payload } = await validateToken(token);
+    try {
+      const { payload } = await validateToken(token);
 
-    return reply.status(200).send({ payload });
+      return reply.status(200).send({ payload });
+    } catch (error) {
+      return reply.status(401).send({ error: "Usuário não autenticado." });
+    }
   });
 
   // GENERATE IMAGE (OPENAI API)
