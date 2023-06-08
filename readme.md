@@ -7,38 +7,12 @@ DALL·E 2 Clone</h1>
 <img src="https://i.imgur.com/7frTokE.jpeg" height="320"/>
 </p>
 
-## Running it locally
+## Projeto
 
-###### First start the server
+Projeto feito baseado no DALL·E 2 da OpenAI utilizando a OpenAI API. Foram desenvolvidas versões web responsiva com React e também mobile nativo com React Native. As imagens são geradas pela IA da OpenAI enviando um prompt para a OpenAI API e como retorno uma imagem Base64. Para conversão e upload de imagens, utilizei a CloudinaryAPI que é excelente para o armazenamento e utilização na aplicação pois retorna apenas um URL da imagem armazenada. As imagens são vinculadas a cada usuário que a gerou. Os usuários são criados/armazenados/autenticados usando o conjunto poderoso de Fastify e Prisma como base do backend e gerenciamento da base de dados, ambos escrito com Typescript.
 
-- server (node.js using fastify and typescript)
-
-```
-cd server/
-npm run dev
-
-# Let it running for the app keeps working
-```
-
-###### Then choose which platform to use
-
-- web (using Vite)
-
-```
-cd web/
-npm run dev
-
-# Go to http://localhost:5173/ or the link provide by Vite
-```
-
-- native mobile app (using Expo and ExpoGO)
-
-```
-cd mobile/
-npm run start
-# Read the QRCode with Expo Go
-```
+O Layout foi adaptado/criado por mim analisando o original e seu código fonte.
 
 ## Stack
 
-- [TypeScript](https://www.typescriptlang.org/), [Fastify](https://www.fastify.io/), [React](https://reactjs.org/), [Vite](https://vitejs.dev/), [ReactNative](https://reactnative.dev/), [Expo](https://expo.dev/), [TailwindCSS](https://tailwindcss.com/), [Radix](https://www.radix-ui.com/) and [NativeWind](https://www.nativewind.dev/)
+- [TypeScript](https://www.typescriptlang.org/), [Fastify](https://www.fastify.io/), [React](https://reactjs.org/), [Vite](https://vitejs.dev/), [ReactNative](https://reactnative.dev/), [Expo](https://expo.dev/), [TailwindCSS](https://tailwindcss.com/), [Radix](https://www.radix-ui.com/), [NativeWind](https://www.nativewind.dev/), [Prisma](https://www.prisma.io/) and [Cloudinary](https://cloudinary.com/)
